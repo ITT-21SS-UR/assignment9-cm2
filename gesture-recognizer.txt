@@ -1,0 +1,33 @@
+# Author: Claudia
+# Reviewer:  Martina
+
+
+What does the recognizer do? 
+
+The $P recognizer is a point-based recognizer that is used to detect single and 
+multi stroke gestures for rapidly prototyping interfaces in a fast, low-cost and
+accurate way.
+
+################################################################################
+
+Name an advantage of the $P recognizer over the $1 recognizer.
+
+One advantage is that the $P can recognize both unistroke and multistroke gestures 
+by representing gestures as “clouds of Points” so that the stroke order and 
+direction of the user input can be ignored
+whereas the $1 recognizer can only identify unistroke gestures.
+
+################################################################################
+
+What is the minimum matching distance?
+
+The minimum matching distance (“goodness”) is the match between two point clouds - the 
+candidate gesture (C) to the point cloud of each template (T).
+The template that has the smallest distance from C is the classification result.
+
+################################################################################
+
+Wobbrock, J.O., Wilson, A.D. and Li, Y. (2007). Gestures without libraries, toolkits or training: A $1 recognizer for user interface prototypes.2
+Proceedings of the ACM Symposium on User Interface Software and Technology (UIST ’07). Newport, Rhode Island (October 7-10, 2007). New York: ACM
+Press, pp. 159-168., see also https://depts.washington.edu/aimgroup/proj/dollar/
+
