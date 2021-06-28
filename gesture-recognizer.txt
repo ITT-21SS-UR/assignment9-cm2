@@ -27,7 +27,8 @@ The template that has the smallest distance from C is the classification result.
 
 ################################################################################
 
-Wobbrock, J.O., Wilson, A.D. and Li, Y. (2007). Gestures without libraries, toolkits or training: A $1 recognizer for user interface prototypes.2
-Proceedings of the ACM Symposium on User Interface Software and Technology (UIST ’07). Newport, Rhode Island (October 7-10, 2007). New York: ACM
-Press, pp. 159-168., see also https://depts.washington.edu/aimgroup/proj/dollar/
+Vatavu, R.-D., Anthony, L. and Wobbrock, J.O. (2012). Gestures as point clouds: 
+A $P recognizer for user interface prototypes. Proceedings of the ACM International 
+Conference on Multimodal Interfaces (ICMI '12). Santa Monica, California 
+(October 22-26, 2012). New York: ACM Press, pp. 273-280. 
 
