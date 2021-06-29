@@ -63,12 +63,18 @@ class DrawGesture(QtWidgets.QWidget):
         
     def mousePressEvent(self, event):
         if self.insideCanvas(event.x(), event.y()):
-            self.startPoint == event.x(), event.y()
+            self.startPoint = (event.x(), event.y())
+            print("changed", self.startPoint)
+            print("event.x()", event.x())
+            print("event.y()", event.y())
             self.pressed = True
         
     def mouseReleaseEvent(self, event): 
         if self.insideCanvas(event.x(), event.y()):
-            self.startPoint == event.x(), event.y()
+            self.startPoint = (event.x(), event.y())
+            print("changed", self.startPoint)
+            print("event.x()", event.x())
+            print("event.y()", event.y())
             self.pressed = False
           
     def mouseMoveEvent(self, event):
