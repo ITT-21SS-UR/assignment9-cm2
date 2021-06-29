@@ -21,9 +21,10 @@ whereas the $1 recognizer can only identify unistroke gestures.
 
 What is the minimum matching distance?
 
-The minimum matching distance (“goodness”) is the match between two point clouds - the 
-candidate gesture (C) to the point cloud of each template (T).
-The template that has the smallest distance from C is the classification result.
+The minimum matching distance (“goodness”) is the match between two point clouds - the
+candidate gesture to the point cloud of the template from all n! possible alignments.
+The template that has the smallest distance (sum of the Euclidean distances for all pairs of points)
+from the candidate gesture is the classification result (the recognized gesture).
 
 ################################################################################
 
