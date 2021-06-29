@@ -18,7 +18,7 @@ class DrawGesture(QtWidgets.QWidget):
         self.setMouseTracking(True)
         
         # variables
-        self.startPoint = (0,0)
+        self.startPoint = (300,30)
         self.endPoint = (0,0)
         self.pressed = False
         self.allLinesArray = ([])
@@ -31,7 +31,8 @@ class DrawGesture(QtWidgets.QWidget):
 
     def clear(self):
         self.allLinesArray = ([])
-        self.show()
+        self.startPoint == (0,0)
+        self.update()
         print("clear Button pressed")
 
     def recognize(self):
@@ -46,8 +47,6 @@ class DrawGesture(QtWidgets.QWidget):
         qp = QPainter()
         qp.begin(self)
         qp.setPen(QPen(QColor(0, 0, 0, 255), 3))
-        qp.drawLine(self.startPoint[0], self.startPoint[1], self.endPoint[0], self.endPoint[1])
-        self.allLinesArray.append([self.startPoint[0], self.startPoint[1], self.endPoint[0], self.endPoint[1]])
         # redraw old lines 
         for element in self.allLinesArray:
             qp.drawLine(element[0], element[1], element[2], element[3])
@@ -64,20 +63,22 @@ class DrawGesture(QtWidgets.QWidget):
         
     def mousePressEvent(self, event):
         if self.insideCanvas(event.x(), event.y()):
-            self.startPoint = (event.x(), event.y())
+            self.startPoint == event.x(), event.y()
             self.pressed = True
         
     def mouseReleaseEvent(self, event): 
-        self.pressed = False
-        self.endPoint = (event.x(), event.y())
+        if self.insideCanvas(event.x(), event.y()):
+            self.startPoint == event.x(), event.y()
+            self.pressed = False
           
     def mouseMoveEvent(self, event):
-        if self.pressed == True:
+        if self.pressed == True and self.insideCanvas(event.x(), event.y()):
             self.endPoint = (event.x(), event.y())
             self.update()
+            print("end, ", self.endPoint)
+            print("startPoint, ", self.startPoint)
+            self.allLinesArray.append([self.startPoint[0], self.startPoint[1], self.endPoint[0], self.endPoint[1]])
             self.startPoint = (event.x(), event.y())
-        if self.insideCanvas(event.x(), event.y()):
-            self.update()
 
 
 def main():
