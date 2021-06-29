@@ -117,7 +117,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>160</y>
+     <y>200</y>
      <width>111</width>
      <height>151</height>
     </rect>
@@ -127,7 +127,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>130</y>
+     <y>170</y>
      <width>67</width>
      <height>19</height>
     </rect>
@@ -195,6 +195,22 @@
    </property>
    <property name="text">
     <string>Delete Gesture</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="trainButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>111</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(192, 191, 188)</string>
+   </property>
+   <property name="text">
+    <string>Train Gesture</string>
    </property>
   </widget>
  </widget>

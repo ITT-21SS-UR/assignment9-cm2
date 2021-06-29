@@ -26,8 +26,10 @@ class DrawGesture(QtWidgets.QWidget):
         self.setupButtons()
 
         self.__setup_gesture_list()
+        self.__is_training = False  # TODO in model
 
     def addImage(self):
+        self.__handle_stop_training()
         gesture_name, ok = QtWidgets.QInputDialog.getText(self, "Add new gesture", "new gesture name")
 
         if gesture_name:
@@ -42,13 +44,17 @@ class DrawGesture(QtWidgets.QWidget):
         print("clear Button pressed")
 
     def recognize(self):
+        self.__handle_stop_training()
+        # TODO at least ?? gesture have to be trained for recognition
+        # self.gestureRecognizeLabel text anpassen
         print("reco Button pressed")
 
     def setupButtons(self):
         self.addButton.clicked.connect(self.addImage)
         self.emptyButton.clicked.connect(self.clear)
         self.recoButton.clicked.connect(self.recognize)
-        self.deleteButton.clicked.connect(self.__delete_gesture)
+        self.deleteButton.clicked.connect(self.__delete_gesture_clicked)
+        self.trainButton.clicked.connect(self.__train_gesture_clicked)
 
     def __setup_gesture_list(self):
         self.gestureList.itemSelectionChanged.connect(self.__selected_gesture_changed)
@@ -56,8 +62,6 @@ class DrawGesture(QtWidgets.QWidget):
     def __selected_gesture_changed(self):
         print("selection changed")
         # TODO depending on data of gesture update gesture list model
-        # gestureRecognizeLabel
-
         # self.gestureList.currentItem().text()
 
     def __add_gesture_item(self, gesture_name: str):
@@ -65,12 +69,31 @@ class DrawGesture(QtWidgets.QWidget):
         self.gestureList.addItem(gesture_item)
         self.gestureList.setCurrentItem(gesture_item)
 
-    def __delete_gesture(self):
+    def __delete_gesture_clicked(self):
+        self.__handle_stop_training()
         if not self.__is_gesture_item_selected():
             self.__show_no_gesture_item_selected()
             return
 
         self.__show_gesture_accept_delete()
+
+    def __train_gesture_clicked(self):
+        if not self.__is_gesture_item_selected():
+            self.__show_no_gesture_item_selected()
+            return
+
+        if self.__is_training:
+            self.__handle_stop_training()
+        else:
+            self.trainButton.setText("Training...")
+            self.__is_training = True  # TODO in model
+            # TODO collect training data
+            # self.__gesture_model.set_is_training(True)
+
+    def __handle_stop_training(self):
+        self.trainButton.setText("Train Gesture")
+        self.__is_training = False  # TODO in model
+        # self.__gesture_model.train_gestures()
 
     def __show_no_gesture_item_selected(self):
         QtWidgets.QMessageBox.warning(self, "No gesture selected", "No gesture was selected.\n"
