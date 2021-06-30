@@ -64,8 +64,7 @@ class GestureWidget(QtWidgets.QWidget):
             self.__show_no_gesture_item_selected()
             return
 
-        # TODO train data
-        print("train")
+        self.__gesture_model.add_training_data()
 
     def __setup_add_gesture(self):
         add_gesture_button = QtWidgets.QPushButton("Add gesture")
@@ -123,6 +122,7 @@ class GestureWidget(QtWidgets.QWidget):
 
     def __selected_gesture_changed(self):
         if self.__gesture_model.is_gestures_empty():
+            self.__gesture_model.set_selected_gesture_name(None)
             return
 
         self.__gesture_model.set_selected_gesture_name(self.__gesture_list.currentItem().text())
@@ -130,6 +130,10 @@ class GestureWidget(QtWidgets.QWidget):
     def __connect_signals(self):
         self.__gesture_model.gesture_name_exists.connect(self.__show_gesture_name_exists)
         self.__gesture_model.gesture_item_added.connect(self.__add_gesture_item)
+        self.__gesture_model.gesture_predicted.connect(self.__update_gesture_predicted)
+
+    def __update_gesture_predicted(self, text):
+        self.__prediction_text.setText(text)
 
     def __handle_gestures_added(self, gesture_names):
         for name in gesture_names:

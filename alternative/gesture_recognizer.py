@@ -40,10 +40,17 @@ class MainWindow(QtWidgets.QWidget):
 
     def __predict_gesture(self):
         if self.__ctrl_panel.get_gesture_model().is_gestures_empty():
-            # TODO when empty text
             self.__ctrl_panel.set_prediction_text("- no gesture was trained -")
-        # TODO update model data maybe real time prediction
-        print("predict gesture real time")
+
+        try:
+            self.__ctrl_panel.get_gesture_model().update_current_gesture_input(self.__draw_widget.points)
+            predicted_gesture = self.__ctrl_panel.get_gesture_model().predict_gesture(self.__draw_widget.points)
+
+            if predicted_gesture:
+                self.__ctrl_panel.set_prediction_text(predicted_gesture)
+
+        except ZeroDivisionError:
+            sys.stderr.write("ZeroDivisionError")
 
 
 def main():
