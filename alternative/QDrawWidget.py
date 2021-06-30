@@ -8,7 +8,7 @@ class QDrawWidget(QtWidgets.QWidget):
 
     def __init__(self, width=800, height=800):
         super().__init__()
-        self.resize(width, height)
+        self.setMinimumSize(width, height)
         self.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.drawing = False
         self.grid = True
