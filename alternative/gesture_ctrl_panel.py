@@ -9,6 +9,7 @@ from gesture_model import GestureModel
 # Reviewer: Martina
 class GestureWidget(QtWidgets.QWidget):
     BEGIN_TRAINING_TEXT = "Train gesture"
+    NO_GESTURE_TEXT = "- no gesture detected -"
 
     def __init__(self):
         super().__init__()
@@ -44,21 +45,19 @@ class GestureWidget(QtWidgets.QWidget):
         # setup text for the predicted gesture
         self.__prediction_text = QtWidgets.QLabel()
         self.__prediction_text.setWordWrap(True)
-        self.__prediction_text.setText("- no gesture -")
+        self.__prediction_text.setText(self.NO_GESTURE_TEXT)
         self.__layout.addWidget(self.__prediction_text)
-
-        # TODO use for prediction
 
     def __setup_training_label(self):
         train_text = QtWidgets.QLabel()
-        train_text.setText("\nTraining\n")
+        train_text.setText("\nTraining")
         self.__layout.addWidget(train_text)
 
     def __setup_training_button(self):
-        self.__training_button = QtWidgets.QPushButton()
-        self.__training_button.setText(self.BEGIN_TRAINING_TEXT)
-        self.__training_button.clicked.connect(self.__training_button_clicked)
-        self.__layout.addWidget(self.__training_button)
+        training_button = QtWidgets.QPushButton()
+        training_button.setText(self.BEGIN_TRAINING_TEXT)
+        training_button.clicked.connect(self.__training_button_clicked)
+        self.__layout.addWidget(training_button)
 
     def __training_button_clicked(self):
         if self.__gesture_model.is_gestures_empty():
@@ -69,9 +68,9 @@ class GestureWidget(QtWidgets.QWidget):
         print("train")
 
     def __setup_add_gesture(self):
-        self.__add_gesture_button = QtWidgets.QPushButton("Add gesture")
-        self.__add_gesture_button.clicked.connect(self.__add_gesture_button_clicked)
-        self.__layout.addWidget(self.__add_gesture_button)
+        add_gesture_button = QtWidgets.QPushButton("Add gesture")
+        add_gesture_button.clicked.connect(self.__add_gesture_button_clicked)
+        self.__layout.addWidget(add_gesture_button)
 
     def __add_gesture_button_clicked(self):
         gesture_name, ok = QtWidgets.QInputDialog.getText(self, "Add new gesture", "new gesture name")
@@ -90,9 +89,9 @@ class GestureWidget(QtWidgets.QWidget):
                                                                    "Please select or add a gesture.")
 
     def __setup_retrain_gesture(self):
-        self.__retrain_gesture_button = QtWidgets.QPushButton("Retrain gesture")
-        self.__retrain_gesture_button.clicked.connect(self.__retrain_gesture_button_clicked)
-        self.__layout.addWidget(self.__retrain_gesture_button)
+        retrain_gesture_button = QtWidgets.QPushButton("Retrain gesture")
+        retrain_gesture_button.clicked.connect(self.__retrain_gesture_button_clicked)
+        self.__layout.addWidget(retrain_gesture_button)
 
     def __retrain_gesture_button_clicked(self):
         if not self.__is_gesture_item_selected():
@@ -102,9 +101,9 @@ class GestureWidget(QtWidgets.QWidget):
         self.__show_gesture_accept_retrain()
 
     def __setup_remove_gesture(self):
-        self.__remove_gesture_button = QtWidgets.QPushButton("Remove gesture")
-        self.__remove_gesture_button.clicked.connect(self.__remove_gesture_button_clicked)
-        self.__layout.addWidget(self.__remove_gesture_button)
+        remove_gesture_button = QtWidgets.QPushButton("Remove gesture")
+        remove_gesture_button.clicked.connect(self.__remove_gesture_button_clicked)
+        self.__layout.addWidget(remove_gesture_button)
 
     def __remove_gesture_button_clicked(self):
         if not self.__is_gesture_item_selected():
@@ -170,3 +169,6 @@ class GestureWidget(QtWidgets.QWidget):
 
     def get_gesture_model(self):
         return self.__gesture_model
+
+    def set_prediction_text(self, text):
+        self.__prediction_text.setText(text)

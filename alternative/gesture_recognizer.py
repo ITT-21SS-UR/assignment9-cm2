@@ -6,7 +6,7 @@ from QDrawWidget import QDrawWidget
 from gesture_ctrl_panel import GestureWidget
 
 """
-QDrawWidget.py and dollar_1.py are copied from the course resources with some adjustments 
+QDrawWidget.py and dollar_1.py are copied from the course resources with some adjustments. 
 """
 
 
@@ -34,13 +34,15 @@ class MainWindow(QtWidgets.QWidget):
 
         self.__draw_widget = QDrawWidget()
         layout.addWidget(self.__draw_widget)
-        # self.__draw_widget.drawing_finished.connect(self.__predict_gesture)  # TODO
-        # TODO update model data maybe real time prediction
+        self.__draw_widget.drawing_finished.connect(self.__predict_gesture)
 
         self.setLayout(layout)
 
     def __predict_gesture(self):
-        # only when not empty
+        if self.__ctrl_panel.get_gesture_model().is_gestures_empty():
+            # TODO when empty text
+            self.__ctrl_panel.set_prediction_text("- no gesture was trained -")
+        # TODO update model data maybe real time prediction
         print("predict gesture real time")
 
 

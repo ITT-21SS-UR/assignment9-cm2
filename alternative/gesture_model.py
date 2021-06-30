@@ -1,5 +1,3 @@
-from enum import Enum
-
 from PyQt5.QtCore import QObject, pyqtSignal
 
 
@@ -7,10 +5,6 @@ from PyQt5.QtCore import QObject, pyqtSignal
 
 # Author: Claudia, Martina
 # Reviewer:  Martina
-class GestureState(Enum):
-    TRAINING = "training"
-    PREDICTION = "predict"
-
 
 class GestureModel(QObject):
     GESTURE_NAME = "gesture_name"
@@ -25,7 +19,6 @@ class GestureModel(QObject):
 
         self.__gestures = []
         self.__id_count = 0
-        self.__is_training = False
         self.__selected_gesture_name = None
 
     def __exists_gesture_name(self, gesture_name: str):
@@ -67,23 +60,15 @@ class GestureModel(QObject):
     def set_selected_gesture_name(self, gesture_name):
         self.__selected_gesture_name = gesture_name
 
-    def is_training(self):
-        return self.__is_training
-
-    def set_is_training(self, is_training):
-        self.__is_training = is_training
-
-    def collect_training_data(self, gesture_input):
-        # TODO
-        if not self.__is_training:
-            return
-
+    def add_training_data(self, gesture_input):
+        # TODO add_training_data
         # selected_gesture = self.__find_gesture_by_name(self.__selected_gesture_name)
         # selected_gesture[self.GESTURE_DATA].append(gesture_input[NodeKey.GESTURE_DATA.value])
+        pass
 
     def train_gestures(self):
         # TODO train gestures
-        print("train gesture")
+        print("train")
 
     def predict_gesture(self, gesture_input):
         # TODO predict gesture
@@ -92,3 +77,4 @@ class GestureModel(QObject):
     def retrain_gesture(self, gesture_name):
         # TODO delete if not enough time to implement
         print("retrain")
+        self.train_gestures()  # all gestures have to be trained again
