@@ -6,6 +6,14 @@ from QDrawWidget import QDrawWidget
 from gesture_ctrl_panel import GestureWidget
 
 """
+Starting point of the application
+
+Gestures that are good for prediction:
+    - numbers
+
+There was no requirement in the task that the gestures have to be pre-trained
+so the user has to train them individually.
+
 QDrawWidget.py and dollar_1.py are copied from the course resources with some adjustments. 
 """
 
@@ -44,7 +52,7 @@ class MainWindow(QtWidgets.QWidget):
 
         try:
             self.__ctrl_panel.get_gesture_model().update_current_gesture_input(self.__draw_widget.points)
-            predicted_gesture = self.__ctrl_panel.get_gesture_model().predict_gesture(self.__draw_widget.points)
+            predicted_gesture = self.__ctrl_panel.get_gesture_model().predict_gesture()
 
             if predicted_gesture:
                 self.__ctrl_panel.set_prediction_text(predicted_gesture)

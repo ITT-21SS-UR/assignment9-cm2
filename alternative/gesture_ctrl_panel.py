@@ -2,8 +2,14 @@ from PyQt5 import QtWidgets
 
 from gesture_model import GestureModel
 
+"""
+copied from previous task with modifications
 
-# copied from previous task with modifications
+GestureWidget that is is responsible for the UI controls
+    Is used for layout components and its UI changes e.g. setting, connecting signals to button clicks
+    so that the model (GestureModel) can handle them.
+"""
+
 
 # Author: Claudia, Martina
 # Reviewer: Martina
@@ -39,7 +45,7 @@ class GestureWidget(QtWidgets.QWidget):
         info_text = QtWidgets.QLabel()
         info_text.setWordWrap(True)
         info_text.setText("\nTrain some gestures for prediction.\n\n"
-                          "Latest predicted gesture:")
+                          "Predicted gesture:")
         self.__layout.addWidget(info_text)
 
         # setup text for the predicted gesture

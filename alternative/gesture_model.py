@@ -2,14 +2,19 @@ import sys
 
 from PyQt5.QtCore import QObject, pyqtSignal
 
+import dollar_1
 
-# copied from previous task with modifications
+"""
+copied from previous task with modifications
+
+GestureModel saves and processes relevant data for the GestureWidget and MainWindow.
+    Is used to add, remove, predict, retrain, train gestures.
+    Emits signals when a layout element should be changed e.g. when a gesture is predicted.
+"""
+
 
 # Author: Claudia, Martina
 # Reviewer:  Martina
-import dollar_1
-
-
 class GestureModel(QObject):
     GESTURE_NAME = "gesture_name"
     GESTURE_DATA = "gesture_data"
@@ -58,8 +63,6 @@ class GestureModel(QObject):
         if self.is_gestures_empty():
             self.__selected_gesture_name = None
 
-        # self.train_gestures()  # TODO ? all gestures have to be trained again
-
     def is_gestures_empty(self):
         return not self.__gestures
 
@@ -70,7 +73,6 @@ class GestureModel(QObject):
         self.__current_gesture_input = []
 
     def add_training_data(self):
-        # TODO add_training_data
         selected_gesture = self.__find_gesture_by_name(self.__selected_gesture_name)
         selected_gesture[self.GESTURE_DATA].append(self.__current_gesture_input)
         self.empty_current_gesture_input()
@@ -83,11 +85,7 @@ class GestureModel(QObject):
         else:
             self.__current_gesture_input = []
 
-    def train_gestures(self):
-        # TODO train gestures
-        print("train")
-
-    def predict_gesture(self, gesture_input):
+    def predict_gesture(self):
         # adjusted recognize(self) from
         # https://github.com/ITT-21SS-UR/assignment9-js-9/blob/main/gesture_recognizer_ui.py
 
@@ -104,12 +102,10 @@ class GestureModel(QObject):
                     best_match = (sim, gesture)
 
         if best_match[0] > 1500:
-            self.gesture_predicted.emit("** no match **")
+            self.gesture_predicted.emit("- no gesture detected -")
         else:
             self.gesture_predicted.emit(best_match[1][self.GESTURE_NAME])
 
     def retrain_gesture(self, gesture_name):
-        # TODO delete if not enough time to implement
         gesture = self.__find_gesture_by_name(gesture_name)
         gesture[self.GESTURE_DATA] = []  # clear gesture data
-        # self.train_gestures()  # TODO all gestures have to be trained again
